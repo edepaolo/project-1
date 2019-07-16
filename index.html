@@ -3,12 +3,18 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Munch - Clarifai + Wolfram Demo </title>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
   <script type="text/javascript" src="https://s3.amazonaws.com/static.mlh.io/blog-code/2018-02-clarifai-nutrition-app/wolfram.js"></script>
   <script type="text/javascript" src="predict.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css" />
   <!-- <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/static.mlh.io/blog-code/2018-02-clarifai-nutrition-app/app.css" /> -->
+
 </head>
 <body>
   <div class="wrapper">
@@ -25,9 +31,24 @@
         <div class="step"><span>1</span> Upload a Photo</div>
       </div>
       <div class="nutrition">
-        <div class="step"><span>2</span> Get a Nutritional Breakdown</div>
+        <!-- <div class="step"><span>2</span> Get a Nutritional Breakdown</div> -->
+        <div class="card mb-4">
         <div id="concepts"></div>
-      </div>
+            <div class="card-header">My Plated Playlist</div>
+            <div class="card-body">
+            <table class="table table-sm table-hover" id='playlist-table'>
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Artist</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+        </div>
+      <!-- </div> -->
     </div>
 
     <div class="powered-by">
