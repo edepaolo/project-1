@@ -6,6 +6,7 @@
 body {
     background-color: rgb(245, 239, 233);
     font-family: 'Maven Pro', sans-serif;
+    padding-bottom: 50px;
 }
 #banner-text {
     color: #fff;
@@ -44,7 +45,7 @@ body {
     box-shadow: 0 4px 8px 0;
 }
 
-button {
+#filename {
     position: relative;
     top: 330px;
     left: 10px;
@@ -59,11 +60,3 @@ button {
     box-shadow: 0 4px 8px 0;    
 }
 
-footer {
-    background: #fff;
-    color: #777;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-}
