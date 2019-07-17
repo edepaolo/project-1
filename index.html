@@ -1,37 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Munch - Clarifai + Wolfram Demo </title>
+  <meta charset="UTF-8">
+  <meta http-equiv="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Plate Mate - Music for your food and your soul </title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Courgette|Maven+Pro:400,700&display=swap" rel="stylesheet">
+  <!-- jQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <!-- Clarifai -->
   <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
   <script type="text/javascript" src="https://s3.amazonaws.com/static.mlh.io/blog-code/2018-02-clarifai-nutrition-app/wolfram.js"></script>
   <script type="text/javascript" src="predict.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="../project-1/assets/css/style.css"/>
+  <link rel="stylesheet" href="../project-1/assets/css/reset.css">
   <!-- <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/static.mlh.io/blog-code/2018-02-clarifai-nutrition-app/app.css" /> -->
 </head>
 <body>
-  <div class="wrapper">
-    <h1>What are you eating?</h1>
-    <h2>Snap a photo of your food & upload for a nutritional breakdown.</h2>
-
-    <form action="#">
-      <input type="file" id="filename" placeholder="Filename" size="100"/>
-      <button onclick="predict_click($('#filename').val(), 'file'); return false;">Get my Nutritional Breakdown!</button>
-    </form>
-
-    <div id="predictions">
-      <div class="food-photo">
-        <div class="step"><span>1</span> Upload a Photo</div>
-      </div>
-      <div class="nutrition">
-        <div class="step"><span>2</span> Get a Nutritional Breakdown</div>
-        <div id="concepts"></div>
-      </div>
+  <div class="background-image">
+    <div id="banner-text">
+        <p>Plate Mate - Where music meets food for the soul!</p>
     </div>
+</div>
+
+<div class="info">
+    <p>The future is now!
+        <br>
+    Can you taste it?
+        <br>
+    Can you hear it?
+        <br>
+    Want to set the mood for a special event or just want to connect culturally with your food? Use Plate Mate! Just upload your photo of a specific dish and we will pair it with a playlist of songs matching it! </p>
+</div>
+
+<div class="upload">
+        <button type="button" class="btn btn-primary btn-sm">Upload</button>
+
+        <form action="#">
+          <input type="file" id="filename" placeholder="Filename" size="100"/>
+          <button onclick="predict_click($('#filename').val(), 'file'); return false;">Get my Nutritional Breakdown!</button>
+        </form>
+
+</div> 
+
+<div class="playlist">
+
+  <div class="card mb-4">
+    <div id="concepts"></div>
+        <div class="card-header">My Plated Playlist</div>
+        <div class="card-body">
+        <table class="table table-sm table-hover" id='playlist-table'>
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
 
     <div class="powered-by">
-      <p>Inspired by <a href="https://devpost.com/software/munch-emsv0u">Munch</a>.  Powered by <img src="https://clarifai.com/static/images/logo.png" alt="Clarifai" />.</p>
+      <footer>
+     Inspired by <a href="https://devpost.com/software/munch-emsv0u">Munch.</a>  Powered by <a href="https://clarifai.com/"></a>Clarifai
+    </footer>
     </div>
   </div>
 </body>
