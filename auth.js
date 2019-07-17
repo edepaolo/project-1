@@ -1,49 +1,50 @@
-import 'firebase/auth';
+//SIGN UP
+const signupForm = document.querySelector('#signup-form');
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-var firebaseConfig = {
-    apiKey: process.env.AIzaSyBzON4BmWg7bGO6P4W0B2k_0K8qpwu830Q,
-    authDomain: process.env.project-1-storagetester.firebaseapp.com,
-    databaseURL: process.env.https://project-1-storagetester.firebaseio.com,
-    projectId: process.env.project-1-storagetester,
-    storageBucket: process.env.project-1-storagetester.appspot.com,
-    messagingSenderId: process.env.609060845971,
-    appId: process.env.1:609060845971:web:d10bfc58fe17bcdb,
-  };
+    // get user info
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value;
 
-class Firebase {
-    constructor() {
-      app.initializeApp(config);
-  
-      this.auth = app.auth();
-    }
-  
-    // *** Auth API ***
-  
-    doCreateUserWithEmailAndPassword = (email, password) =>
-      this.auth.createUserWithEmailAndPassword(email, password);
-  
-    doSignInWithEmailAndPassword = (email, password) =>
-      this.auth.signInWithEmailAndPassword(email, password);
-  
-    doSignOut = () => this.auth.signOut();
-  
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-  
-    doPasswordUpdate = password =>
-      this.auth.currentUser.updatePassword(password);
-  }
+    console.log(email, password);
 
-//================================================================
-//USER AUTHENTICATED - GET USER DATA
-var user = firebase.auth().currentUser;
-var name, email, photoUrl, uid, emailVerified;
+    //sign up the user
+    //auth = in html references auth firebase
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        console.log(cred);
+        //colse the signup modal and reset form
+        const modal = document.querySelector('#modal-signup');
+        M.Modal.getInstance(modal).close();
+        signupForm.reset();
+    })  
+})
 
-if (user != null) {
-  name = user.displayName;
-  email = user.email;
-  photoUrl = user.photoURL;
-  emailVerified = user.emailVerified;
-  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                   // this value to authenticate with your backend server, if
-                   // you have one. Use User.getToken() instead.
-}
+// logout
+const logout = document.querySelector('#logout');
+logout.addEventListener('click', (e) => {
+  e.preventDefault();
+  auth.signOut().then(() => {
+    console.log('user signed out');
+  })
+});
+
+// login
+const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  // get user info
+  const email = loginForm['login-email'].value;
+  const password = loginForm['login-password'].value;
+
+  // log the user in
+  auth.signInWithEmailAndPassword(email, password).then((cred) => {
+    console.log(cred.user);
+    // close the signup modal & reset form
+    const modal = document.querySelector('#modal-login');
+    M.Modal.getInstance(modal).close();
+    loginForm.reset();
+  });
+
+});

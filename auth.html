@@ -1,55 +1,158 @@
-<!DOCTYPE html>
-
-<html lang="en-us">
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-  <meta charset="UTF-8">
-  <title>Train Time</title>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-  <!-- Firebase References -->
-    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-firestore.js"></script>
+    <title>Document</title>
 </head>
-<body>
-<!-- Entry Form -->
-<form>
-        <div class="form-group">
-          <label for="first-name-input">First Name</label>
-          <input class="form-control" id="first-input" placeholder="Bob" type="text">
-        </div>
-        <div class="form-group">
-          <label for="last-name-input">Last Name</label>
-          <input class="form-control" id="last-input" placeholder="Bobby" type="text">
-        </div>
-        <div class="form-group">
-          <label for="password-input">password</label>
-          <input class="form-control" id="password-input" placeholder="6 characters" type="text">
-        </div>
-        <button class="btn btn-primary float-right" id="add-user-btn">Submit</button>
-      </form>
+<body class = "grey lighten-3"> 
 
-        <!-- JavaScript -->
-        <script src="auth.js"></script>
+<!-- NAVBAR -->
+<nav class="z-depth-0 grey lighten-4">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">
+              <!-- LOGO WONT WORK AT THIS POINT BECAUSE IMAGE ISNT LINKED -->
+            <!-- <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
+          </a> -->
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li class="logged-in">
+                <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
+              </li>
+              <li class="logged-in">
+                <a href="#" class="grey-text" id="logout">Logout</a>
+              </li>
+              <li class="logged-in">
+                <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
+              </li>
+              <li class="logged-out">
+                <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+              </li>
+              <li class="logged-out">
+                <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+              </li>
+            </span>
+          </ul>
+        </div>
+      </nav>
+<!-- SIGN UP MODAL -->
+<div id="modal-signup" class="modal">
+        <div class="modal-content">
+          <h4>Sign up</h4><br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+              <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+          </form>
+        </div>
+      </div>
 
-        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-      
-        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-        <script src="/__/firebase/6.3.0/firebase-app.js"></script>
-      
-        <!-- Add Firebase products that you want to use -->
-        <script src="/__/firebase/6.3.0/firebase-auth.js"></script>
-        <script src="/__/firebase/6.3.0/firebase-firestore.js"></script>
-        <!-- Previously loaded Firebase SDKs -->
+<!-- LOGIN MODAL -->
+<div id="modal-login" class="modal">
+        <div class="modal-content">
+          <h4>Login</h4><br />
+          <form id="login-form">
+            <div class="input-field">
+              <input type="email" id="login-email" required />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Your password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Login</button>
+          </form>
+        </div>
+      </div>
 
-        <!-- Initialize Firebase -->
-        <script src="/__/firebase/init.js"></script>
+<!-- ACCOUNT MODAL -->
+<div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+          <h4>Account details</h4><br />
+          <div class="account-details"></div>
+          <div class="account-extras"></div>
+        </div>
+      </div>
+
+<!-- CREATE GUIDE MODAL -->
+<div id="modal-create" class="modal">
+        <div class="modal-content">
+          <h4>Create Guide</h4><br />
+          <form id="create-form">
+            <div class="input-field">
+              <input type="text" id="title" required>
+              <label for="title">Guide Title</label>
+            </div>
+            <div class="input-field">
+              <textarea id="content" class="materialize-textarea" required></textarea>
+              <label for="content">Guide Content</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+          </form>
+        </div>
+      </div>
+
+    <!-- GUIDE LIST -->
+  <div class="container" style="margin-top: 40px;">
+        <ul class="collapsible z-depth-0 guides" style="border: none;">
+          <li>
+            <div class="collapsible-header grey lighten-4">Guide title</div>
+            <div class="collapsible-body white">Lorem ipsum dolor sit amet.</div>
+          </li>
+          <li>
+            <div class="collapsible-header grey lighten-4">Guide title</div>
+            <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header grey lighten-4">Guide title</div>
+            <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header grey lighten-4">Guide title</div>
+            <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+        </ul>
+      </div>
+
+<!-- FIREBASE TO LOAD IN THE LIBRARY -->
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-firestore.js"></script>
+<script>
+  // FIREBASE
+  var firebaseConfig = {
+    apiKey: "AIzaSyDbPue87h9dyiMWQB948XPEL6DfaOdC7a8",
+    authDomain: "project-1-auth.firebaseapp.com",
+    databaseURL: "https://project-1-auth.firebaseio.com",
+    projectId: "project-1-auth",
+    storageBucket: "project-1-auth.appspot.com",
+    messagingSenderId: "282483411693",
+    appId: "1:282483411693:web:26841c579d78d116"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  //MAKE AUTH AND FIRESTORE REFERENCES
+  const auth = firebase.auth(); //making service with reference too
+  const db = firebase.firestore(); //initalizing reference to firestore
+
+
+</script>
+
+    <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="auth.js"></script>
+  <script src="auth-index.js"></script>
+
+
 
 </body>
-
 </html>
