@@ -1,4 +1,4 @@
-var tempData = {
+{
     "status": "success",
     "result": [
         {
@@ -40,127 +40,56 @@ var tempData = {
             "artist": "Birdy Nam Nam",
             "lyrics": "Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite\r\n I'm goin in\r\n I'm goin in\r\n Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite\r\n Im going wild for the night, fuck being polite",
             "media": "[]"
-        }]}
-//=====================================================================
-// ===== KEYS =========================================================
-var myClarifaiApiKey = 'b24eb56b7a5c47ecb9873c2bdb89b9cd';
-
-var app = new Clarifai.App({apiKey: myClarifaiApiKey});
-
-// VARIABLES:
-// =======================================================================
-
-// FOOD CATEGORIES
-const food = {
-    bread: 'hip hop',
-    bun: 'rock',
-    frenchfries: 'rock',
-    vegetables: 'adele'
-}
-
-
-/*
-  Purpose: Pass information to other helper functions after a user clicks 'Predict'
-  Args:
-    value - Actual filename or URL
-    source - 'url' or 'file'
-    */
-function predict_click(value, source) {
-  var preview = $(".food-photo");
-  var file    = document.querySelector("input[type=file]").files[0];
-  var loader  = "https://s3.amazonaws.com/static.mlh.io/icons/loading.svg"; //spinning circle, added visual while waiting
-  var reader  = new FileReader();
-
-  // load local file picture -- can remove?
-  reader.addEventListener("load", function () {
-    preview.attr('style', 'background-image: url("' + reader.result + '");');
-    doPredict({ base64: reader.result.split("base64,")[1] }); //base64=pulling in bianary object and keeping intact (image), reader=reads the blob(image)
-  }, false);
-
-  if (file) {
-    reader.readAsDataURL(file);
-    $('#concepts').html('<img src="' + loader + '" class="loading" />');
-} else { alert("No file selcted!"); }
-}
-
-/*
-  Purpose: Does a v2 prediction based on user input
-  Args: 
-    value - Either {url : urlValue} or { base64 : base64Value }
-*/
-function doPredict(value) {
-app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
-    if(response.rawData.outputs[0].data.hasOwnProperty("concepts")) {
-        var tag = response.rawData.outputs[0].data.concepts[0].name;  // clariai will determine pic is vegetable
-        var url = 'https://api.audd.io/findLyrics/?q='+food[tag.replace(/\s/g,'')] //uncomment! when not using dummy data
-        
-    console.log(tag); 
-    console.log(food[tag.replace(/\s/g,'')])
-
-    //USE WHEN COMMENTING AJAX
-    console.log(url)
-
-    
-    //USE WHEN COMMENTING OUT - AJAX
-    //console.log(tempData)
-
-    // Performing our AJAX GET request
-    //TODO uncomment this: because there's a 10 requests/day limit!
-    $.ajax({
-        url: url,
-        method: "GET"
-    })
-    .then(function(auddResponse) {
-
-        var allResponse = auddResponse.result;
-        console.log(allResponse);
-        
-            for (var i = 0; i < allResponse.length; i++) {
-                var tTitleResults = allResponse[i].title;
-                var tArtistResults = allResponse[i].artist;
-
-                console.log('titleResults', tTitleResults);
-                console.log('artistResults', tArtistResults);
-
-                var newRow = $("<tr>").append(
-                    $("<td>").text(tTitleResults), 
-                    $("<td>").text(tArtistResults)  
-                  );
-
-                  //WORKING  NOT LOOPING
-                  console.log(auddResponse.result[0].title);
-                  console.log(auddResponse.result[0].artist);
-        
-                  $("#playlist-table > tbody").append(newRow);
-
-            }
-
-        // Store everything into a variable.
-        //var titleResult = auddResponse.result[0].title;
-        //var artistResult = auddResponse.result[0].artist;
-
-        
-
-        //================ COMMENT OUT WHEN USING MOCK DATA / COMMENT IN WHEN USING AJAX REQUEST ==============
-        //console.log('auddResponse', auddResponse);
-    }).catch(function(error){
-        console.log(error);
-    }
-    )
-
-                    //console.log($('#concepts'));
-
-
-//dont need because we ware not getting nutritional info
-        // getNutritionalInfo(url, function (result) {
-        // $('#concepts').html('<h3>'+ tag + '</h3>' + "<img src='"+result+"'>");
-        // });
-
-//PUT STATEMENT TO COMPARE 'TAG' to food group
-
-
-
-    }
-    }, function(err) { console.log(err); }
-);
+        },
+        {
+            "song_id": "1856882",
+            "artist_id": "15496",
+            "title": "Make It Bun Dem (French Fries Remix)",
+            "title_with_featured": "Make It Bun Dem (French Fries Remix)",
+            "full_title": "Make It Bun Dem (French Fries Remix) by Skrillex",
+            "artist": "Skrillex",
+            "lyrics": "[Damian Marley]\r\n Big Gongs, big, big Gongs",
+            "media": "[{\"provider\":\"apple_music\",\"provider_id\":\"555199302\",\"type\":\"audio\",\"url\":\"https:\\/\\/itunes.apple.com\\/lookup?entity=song\u0026id=555199302\"},{\"provider\":\"youtube\",\"start\":0,\"type\":\"video\",\"url\":\"http:\\/\\/www.youtube.com\\/watch?v=JtRQ4-WsbfA\"}]"
+        },
+        {
+            "song_id": "2218807",
+            "artist_id": "456174",
+            "title": "French Fries",
+            "title_with_featured": "French Fries",
+            "full_title": "French Fries by Insan3Lik3",
+            "artist": "Insan3Lik3",
+            "lyrics": "[Instrumental]",
+            "media": "[{\"provider\":\"apple_music\",\"provider_id\":\"556702853\",\"type\":\"audio\",\"url\":\"https:\\/\\/itunes.apple.com\\/lookup?entity=song\u0026id=556702853\"},{\"provider\":\"youtube\",\"start\":0,\"type\":\"video\",\"url\":\"http:\\/\\/www.youtube.com\\/watch?v=eL0-YzBuzTk\"}]"
+        },
+        {
+            "song_id": "426711",
+            "artist_id": "15265",
+            "title": "If French Fries Were Fat Free",
+            "title_with_featured": "If French Fries Were Fat Free",
+            "full_title": "If French Fries Were Fat Free by Alan Jackson",
+            "artist": "Alan Jackson",
+            "lyrics": "[Verse 1]\r\n Will I need a miss of my life\r\n Each time I went left, I should've gone right\r\n And love's no exception to this rule\r\n Cause I turned around I lost you\r\n Now I'm feeling lonesome and blue\r\n Just the way I expect to\r\n But there's something that I could use\r\n To help me deal with this abuse\r\n \r\n [Chorus]\r\n If French fries were fat free\r\n And you still love me\r\n If French fries were fat free\r\n And you still love me\r\n What a wonderful world this would be\r\n If the whiskey really helped me\r\n Forget your memory\r\n I'd wear a smile endlessly\r\n If French fries were fat free\r\n And you still love me\r\n \r\n [Verse 2]\r\n You know the more I think about you\r\n The more sense it makes\r\n Cause grease and love both cause heartache\r\n So I raise my glass and toast\r\n These things I want the most\r\n Though I probably never see\r\n I can't help but believing\r\n [Chorus]",
+            "media": "[]"
+        },
+        {
+            "song_id": "1585203",
+            "artist_id": "314099",
+            "title": "French Fries With Pepper",
+            "title_with_featured": "French Fries With Pepper",
+            "full_title": "French Fries With Pepper by Morphine",
+            "artist": "Morphine",
+            "lyrics": "On 06/06/66 I was little I didn't know shit\r\n About 07/07/77 eleven years later still don't know any better\r\n By 08/08/88 it's way to late for me to change and\r\n By 09/09/99 I hope I'm sitting on the back porch drinking red wine singing\r\n Oh french fries with pepper\r\n Oh french fries with pepper\r\n \r\n On 06/06/66 I was little I didn't know shit\r\n About 07/07/77 eleven years later still don't know any better\r\n By 08/08/88 it's way to late for me to change and\r\n By 09/09/99 I hope I'm sitting on the back porch drinking red wine singing\r\n Oh french fries with pepper\r\n Oh french fries with pepper\r\n Oh french fries with pepper\r\n Oh french fries with pepper",
+            "media": "[]"
+        },
+        {
+            "song_id": "4339310",
+            "artist_id": "148898",
+            "title": "French Fries",
+            "title_with_featured": "French Fries",
+            "full_title": "French Fries by The Holdup",
+            "artist": "The Holdup",
+            "lyrics": "",
+            "media": "[]"
+        }
+    ]
 }
