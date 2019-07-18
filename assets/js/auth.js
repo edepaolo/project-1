@@ -1,20 +1,3 @@
-
-
-//listen for auth status changes
-auth.onAuthStateChanged(user => {
-  if (user) {
-    //get data
-    db.collection('playlist').get().then(snapshot => {
-      setupGuides(snapshot.docs);
-      setupUI(user);
-    });
-  }
-  else{
-    setupUI();
-    setupGuides([]); //calling with empty array to remove data
-  }
-});
-
 //SIGN UP
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) => {
@@ -41,7 +24,9 @@ signupForm.addEventListener('submit', (e) => {
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
   e.preventDefault();
-  auth.signOut();
+  auth.signOut().then(() => {
+    console.log('user signed out');
+  })
 });
 
 // login
@@ -50,13 +35,12 @@ loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   
   // get user info
-    //can use 2nd email and password const because it is in a different scope
   const email = loginForm['login-email'].value;
   const password = loginForm['login-password'].value;
 
   // log the user in
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
-    
+    console.log(cred.user);
     // close the signup modal & reset form
     const modal = document.querySelector('#modal-login');
     M.Modal.getInstance(modal).close();
