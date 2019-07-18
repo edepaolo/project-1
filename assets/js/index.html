@@ -26,7 +26,13 @@
   <!-- Clarifai -->
   <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
   <script type="text/javascript" src="https://s3.amazonaws.com/static.mlh.io/blog-code/2018-02-clarifai-nutrition-app/wolfram.js"></script>
-  <script type="text/javascript" src="predict.js"></script>
+  <script type="text/javascript" src="assets/js/predict.js"></script>
+
+  <!-- AUTHENTICATION -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="auth-index.js"></script>
 
 
 
@@ -42,19 +48,19 @@
                     <!-- <img src="img/logo.svg" style="width: 180px; margin-top: 10px;">
                 </a> -->
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="logged-in" style="display: none;">
+                    <li class="logged-in">
                         <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
                     </li>
-                    <li class="logged-in" style="display: none;">
+                    <li class="logged-in">
                         <a href="#" class="grey-text" id="logout">Logout</a>
                     </li>
-                    <li class="logged-in" style="display: none;">
+                    <li class="logged-in">
                         <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
                     </li>
-                    <li class="logged-out" style="display: none;">
+                    <li class="logged-out">
                         <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
                     </li>
-                    <li class="logged-out" style="display: none;">
+                    <li class="logged-out">
                         <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                     </li>
                     </span>
@@ -128,7 +134,22 @@
         <!-- GUIDE LIST -->
     <div class="container" style="margin-top: 40px;">
             <ul class="collapsible z-depth-0 guides" style="border: none;">
-            
+            <li>
+                <div class="collapsible-header grey lighten-4">Guide title</div>
+                <div class="collapsible-body white">Lorem ipsum dolor sit amet.</div>
+            </li>
+            <li>
+                <div class="collapsible-header grey lighten-4">Guide title</div>
+                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header grey lighten-4">Guide title</div>
+                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header grey lighten-4">Guide title</div>
+                <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
             </ul>
         </div>
     
@@ -207,10 +228,7 @@
 
 </script>
 
-    <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="auth.js"></script>
-  <script src="auth-index.js"></script>
+
 
 </body>
 </html>
