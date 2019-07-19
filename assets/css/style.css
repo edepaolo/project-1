@@ -22,7 +22,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    border: 2px solid black;    
+    /* border: 2px solid black;     */
 }
 
 .info {
@@ -59,11 +59,8 @@ body {
     box-shadow: 0 4px 8px 0;    
 }
 
+.form {
+    justify-content: center;
+}
 
 
-/* 
-@media only screen and (max-width: 600px) {
-    body {
-      background-color: lightblue;
-    }
-  } */
