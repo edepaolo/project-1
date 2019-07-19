@@ -15,7 +15,7 @@ const food = {
     vegetables: 'adele'
 }
 
-//SELECTS RANDOM ARTIST/GENERE TO ASSIGN TO PREDECTION
+// MUSIC CATEGORIES - TIE AFTER FOOD VARIABLE IS TRIGGERED
 const musicFind = ['jack johnson', 'jason mraz', 'grateful dead', 'dave mathews', 'wale', 'drake', 'mariah carey', 'frank sinatra',  'coldplay', 'lana del rey', 'u2', 'kanye west', 'train', 'red hot chili peppers' ];
 const musicFindRandom = musicFind[Math.floor(Math.random()*musicFind.length)];
 const musicNoSpace = musicFindRandom.replace(/\s/g,'');
@@ -36,10 +36,10 @@ console.log('no space:', musicNoSpace);
 function predict_click(value, source) {
   var preview = $(".food-photo");
   var file    = document.querySelector("input[type=file]").files[0];
-  //var loader  = "https://s3.amazonaws.com/static.mlh.io/icons/loading.svg"; //spinning circle, added visual while waiting
+  var loader  = ''; //"https://s3.amazonaws.com/static.mlh.io/icons/loading.svg"; //spinning circle, added visual while waiting
   var reader  = new FileReader();
 
-  // load local file picture 
+  // load local file picture
   reader.addEventListener("load", function () {
     preview.attr('style', 'background-image: url("' + reader.result + '");');
     doPredict({ base64: reader.result.split("base64,")[1] }); //base64=pulling in bianary object and keeping intact (image), reader=reads the blob(image)
@@ -51,6 +51,7 @@ function predict_click(value, source) {
 } else { alert("No file selcted!"); }
 }
 
+
 /*
   Purpose: Does a v2 prediction based on user input
   Args: 
@@ -61,15 +62,18 @@ app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
     if(response.rawData.outputs[0].data.hasOwnProperty("concepts")) {
         console.log(response.rawData.outputs[0].data.hasOwnProperty("concepts"));
         var tag = response.rawData.outputs[0].data.concepts[0].name;  // clariai will determine pic is vegetable
-        //var url = 'https://api.audd.io/findLyrics/?q='+food[tag.replace(/\s/g,'')] //LOOKS UP AGAINST OBJECT ARRAY
-        var url = 'https://api.audd.io/findLyrics/?q='+musicNoSpace; //using math random 
-
-
+        var url = 'https://api.audd.io/findLyrics/?q='+musicNoSpace;
+        //var url = 'https://api.audd.io/findLyrics/?q='+food[tag.replace(/\s/g,'')] //uncomment! when not using dummy data
+        
     console.log(tag); 
     //console.log(food[tag.replace(/\s/g,'')])
-    console.log(url);
+    console.log(url)
 
-    //AJAX ALL TO AUDD - PULL MUSIC RELATED TO CLARIFA RESULTS
+
+
+    // Performing our AJAX GET request
+    // 10 requests/day limit!
+    //AJAX REQUST FOR AUDD TO PULL MUSIC TIED TO FOOD
     $.ajax({
         url: url,
         method: "GET"
@@ -95,12 +99,10 @@ app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
                 $("#playlist-table > tbody").append(newRow);
 
             }
-
     }).catch(function(error){
         console.log(error);
     }
     )
-
     }
     }, function(err) { console.log(err); }
 );
