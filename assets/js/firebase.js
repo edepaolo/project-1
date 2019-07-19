@@ -12,6 +12,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 //MAKE AUTH AND FIRESTORE REFERENCES
-const auth = firebase.auth(); //making service with reference too
-const db = firebase.firestore(); //initalizing reference to firestore
+const auth = firebase.auth(); //making service with reference to authenticate
+const db = firebase.firestore(); //PHASE II - storing/pulling PLAYLIST DATA: initalizing reference to firestore
 
