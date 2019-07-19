@@ -5,13 +5,13 @@ auth.onAuthStateChanged(user => {
   if (user) {
     //get data
     db.collection('playlist').get().then(snapshot => {
-      setupGuides(snapshot.docs);
+      //setupGuides(snapshot.docs); //PHASE II -- Displaying playlist when user is signed in
       setupUI(user);
     });
   }
   else{
     setupUI();
-    setupGuides([]); //calling with empty array to remove data
+    //setupGuides([]); //calling with empty array to remove data //PHASE II -- Empty playlist when user is signed out
   }
 });
 
