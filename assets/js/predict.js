@@ -1,14 +1,13 @@
 
-//=====================================================================
 // ===== KEYS =========================================================
 var myClarifaiApiKey = 'b24eb56b7a5c47ecb9873c2bdb89b9cd';
-
 var app = new Clarifai.App({apiKey: myClarifaiApiKey});
+
 
 // VARIABLES:
 // =======================================================================
 
-// FOOD CATEGORIES
+// FOOD CATEGORIES - WILL ALLIGN TO IMAGE (FOOD TAG)
 const food = {
     bread: 'hip hop',
     bun: 'rock',
@@ -24,8 +23,9 @@ console.log('random music:', musicFindRandom);
 console.log('no space:', musicNoSpace);
 
 
-//FUNCTIONS
-//===============================================================
+
+//FUNCTIONS:
+//==================================================================================
 
 /*
   Purpose: Pass information to other helper functions after a user clicks 'Predict'
@@ -60,6 +60,7 @@ function predict_click(value, source) {
 function doPredict(value) {
 app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
     if(response.rawData.outputs[0].data.hasOwnProperty("concepts")) {
+        console.log(response.rawData.outputs[0].data.hasOwnProperty("concepts"));
         var tag = response.rawData.outputs[0].data.concepts[0].name;  // clariai will determine pic is vegetable
         var url = 'https://api.audd.io/findLyrics/?q='+musicNoSpace;
         //var url = 'https://api.audd.io/findLyrics/?q='+food[tag.replace(/\s/g,'')] //uncomment! when not using dummy data
@@ -81,8 +82,8 @@ app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
 
         var allResponse = auddResponse.result;
         console.log(allResponse);
-        
-            //FOR LOOP - ITERATE OVER API RESULTS ONLY DISPLAY 3
+
+             // LOOP THROUGH RESPONSE - ONLY PROVIDE 3 FOR PLAYLIST
             for (var i = 0; i < 3; i++) {
                 var tTitleResults = allResponse[i].title;
                 var tArtistResults = allResponse[i].artist;
@@ -93,9 +94,9 @@ app.models.predict(Clarifai.FOOD_MODEL, value).then(function(response) {
                 var newRow = $("<tr>").append(
                     $("<td>").text(tTitleResults), 
                     $("<td>").text(tArtistResults)  
-                  );
+                );
         
-                  $("#playlist-table > tbody").append(newRow);
+                $("#playlist-table > tbody").append(newRow);
 
             }
     }).catch(function(error){
